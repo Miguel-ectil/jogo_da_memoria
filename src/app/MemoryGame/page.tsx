@@ -61,7 +61,8 @@ const MemoryGame = () => {
   useEffect(() => {
     const shuffledCards = shuffle(cards);
     setGameCards(shuffledCards);
-  }, []);
+    setFlippedCardIndex(null);
+  }, [])
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
