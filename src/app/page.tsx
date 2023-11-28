@@ -1,18 +1,34 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const cards = [
-  { id: 1, value: '1', isFlipped: false },
-  { id: 2, value: '2', isFlipped: false },
-  { id: 3, value: '3', isFlipped: false },
-  { id: 4, value: '4', isFlipped: false },
-  { id: 5, value: '5', isFlipped: false },
-  { id: 6, value: '6', isFlipped: false },
-  { id: 7, value: '7', isFlipped: false },
-  { id: 8, value: '8', isFlipped: false },
+  { id: 1, value: 'A', isFlipped: false },
+  { id: 2, value: 'B', isFlipped: false },
+  { id: 3, value: 'C', isFlipped: false },
+  { id: 4, value: 'D', isFlipped: false },
+  { id: 5, value: 'A', isFlipped: false },
+  { id: 6, value: 'B', isFlipped: false },
+  { id: 7, value: 'C', isFlipped: false },
+  { id: 8, value: 'D', isFlipped: false },
   // Adicione pares de cartas conforme necessário
 ];
+
+function shuffle(array: any[]) {
+  let currentIndex = array.length;
+  let temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 export default function Home() {
   const [gameCards, setGameCards] = useState(cards);
@@ -25,29 +41,27 @@ export default function Home() {
       updatedCards[index].isFlipped = true;
       setFlippedCardIndex(index);
     } else {
-      const firstCard = updatedCards[flippedCardIndex];
-
-      if (firstCard.value === updatedCards[index].value && flippedCardIndex !== index) {
-        // Match found, keep both cards flipped
+      if (updatedCards[flippedCardIndex].value === updatedCards[index].value && flippedCardIndex !== index) {
         updatedCards[index].isFlipped = true;
-        setGameCards(updatedCards);
         setFlippedCardIndex(null);
       } else {
-        // No match found, flip cards back after a short delay
         updatedCards[index].isFlipped = true;
-        setGameCards(updatedCards);
-
         setTimeout(() => {
+          updatedCards[flippedCardIndex].isFlipped = false;
           updatedCards[index].isFlipped = false;
-          firstCard.isFlipped = false;
-          setGameCards(updatedCards);
           setFlippedCardIndex(null);
-        }, 1000); // Adjust delay time as needed
+          setGameCards(updatedCards);
+        }, 1000); // Ajuste o tempo de delay conforme necessário
       }
     }
 
     setGameCards(updatedCards);
   };
+
+  useEffect(() => {
+    const shuffledCards = shuffle(cards);
+    setGameCards(shuffledCards);
+  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -60,7 +74,7 @@ export default function Home() {
           >
             {card.isFlipped ? (
               <Image
-                src={`/image_${card.value}.png`} 
+                src={`/image_${card.id}.png`} 
                 fill={true}
                 alt='ANIME'
                 className='rounded'
