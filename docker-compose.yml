@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/src/app
+    environment:
+      - NODE_ENV=production
+      # - API_KEY=your_api_key_here # Exemplo de variável de ambiente sensível
+    networks:
+      - frontend-network
+
+networks:
+  frontend-network:
+    driver: bridge
+  default:
+    name: Jogo da memoria
