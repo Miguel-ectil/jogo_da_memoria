@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import MemoryGame from './MemoryGame/page';
 
 const cards = [
@@ -12,7 +11,6 @@ const cards = [
   { id: 6, value: 'B', isFlipped: false },
   { id: 7, value: 'C', isFlipped: false },
   { id: 8, value: 'D', isFlipped: false },
-  // Adicione pares de cartas conforme necessário
 ];
 
 function shuffle(array: any[]) {
