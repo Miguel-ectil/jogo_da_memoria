@@ -8,10 +8,13 @@ const MemoryGame = () => {
     { id: 2, value: 'B', isFlipped: false },
     { id: 3, value: 'C', isFlipped: false },
     { id: 4, value: 'D', isFlipped: false },
-    { id: 5, value: 'A', isFlipped: false },
-    { id: 6, value: 'B', isFlipped: false },
-    { id: 7, value: 'C', isFlipped: false },
-    { id: 8, value: 'D', isFlipped: false },
+    { id: 9, value: 'E', isFlipped: false },
+
+    { id: 1, value: 'F', isFlipped: false },
+    { id: 2, value: 'G', isFlipped: false },
+    { id: 3, value: 'H', isFlipped: false },
+    { id: 4, value: 'I', isFlipped: false },
+    { id: 9, value: 'E', isFlipped: false },
     // Cada par de cartas deve ter o mesmo 'value'
   ];
 
